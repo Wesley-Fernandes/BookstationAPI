@@ -9,7 +9,8 @@
     "postgres": "^3.3.5"
   },
   "scripts": {
-    "dev": "nodemon main.js"
+    "dev": "nodemon main.js",
+    "start": "node main.js"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
