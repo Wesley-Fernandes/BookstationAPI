@@ -7,7 +7,7 @@ exports.books = (fastify) => {
         fastify.pg.query(`SELECT * FROM books`).then((result) => {
             return reply.send(result.rows);
         }).catch((err) => {
-            return reply.send({error: err.message});
+            return reply.send({ error: err.message });
         });
     });
 
@@ -18,7 +18,7 @@ exports.books = (fastify) => {
         await fastify.pg.query(`SELECT * FROM books WHERE id = '${id}'`).then((result) => {
             return reply.send(result.rows);
         }).catch((err) => {
-            return reply.send({error: err.message});
+            return reply.send({ error: err.message });
         });
     })
 
