@@ -1,7 +1,7 @@
-const { randomUUID } = require('node:crypto');
+
+var uuid = require('uuid-random');
 
 exports.books = (fastify) => {
-
 
     fastify.get('/books', (request, reply) => {
         fastify.pg.query(`SELECT * FROM books`).then((result) => {
@@ -23,7 +23,7 @@ exports.books = (fastify) => {
     })
 
     fastify.post('/books', async (request, reply) => {
-        const id = randomUUID();
+        const id = uuid();
         const {
             title,
             author,
@@ -62,6 +62,7 @@ exports.books = (fastify) => {
             return reply.send({ error: err.message });
         });
     })
+
 
     fastify.delete(('/books/:id'), async (request, reply) => {
         const id = request.params.id;
