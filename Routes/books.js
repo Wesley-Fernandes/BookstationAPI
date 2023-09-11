@@ -34,12 +34,29 @@ exports.books = (fastify) => {
             categories
         } = request.body;
 
+        console.log({
+            title,
+            author,
+            description,
+            cover_image,
+            publication_year,
+            likes,
+            categories
+        })
 
-        await fastify.pg.query(`INSERT INTO books (id, title, author, description, cover_image, publication_year, likes, categories) VALUES (${id}, ${title}, ${author}, ${description}, ${cover_image}, ${publication_year}, ${likes}, ${categories}) RETURNING id`).then((result) => {
-            return reply.send({ status: "Criado com sucesso." });
-        }).catch((err) => {
-            return reply.send({ error: err.message });
-        });
+
+        await fastify.pg.query(
+            'INSERT INTO books (id, title, author, description, cover_image, publication_year, likes, categories) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+            [id, title, author, description, cover_image, publication_year, likes, categories],
+            (err, result) => {
+              if (err) {
+                console.error(err);
+                reply.status(500).send({ error: 'Erro ao criar o livro.' });
+              } else {
+                reply.send({ status: 'Criado com sucesso.' });
+              }
+            }
+          );
     });
 
 
