@@ -1,5 +1,5 @@
 {
-  "main": "server.js",
+  "main": "main.js",
   "dependencies": {
     "@fastify/cors": "^8.3.0",
     "@fastify/postgres": "^5.2.0",
